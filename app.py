@@ -55,7 +55,10 @@ if fichier_uploade is not None:
                     to_date = recherche_to.group(1).split('T')[0] if recherche_to else "DateFinInconnue"
 
                     recherche_gsrn = re.search(r"<gsrn>(.*?)</gsrn>", xml_complet)
-                    gsrn = recherche_gsrn.group(1) if recherche_gsrn else str(compteur)         
+                    gsrn = recherche_gsrn.group(1) if recherche_gsrn else str(compteur)   
+
+                    recherche_direction = re.search(r"<direction>(.*?)</direction>", xml_complet) 
+                    direction = recherche_direction.group(1) if recherche_direction else str(compteur) 
                     
                     # --- NETTOYAGE ---
                     def nettoyer_texte(texte):
@@ -65,9 +68,10 @@ if fichier_uploade is not None:
                     from_date_propre = nettoyer_texte(from_date)
                     to_date_propre = nettoyer_texte(to_date)
                     gsrn_propre = nettoyer_texte(gsrn)
+                    direction_propre = nettoyer_texte(direction)
                     
                     # --- NOM DU FICHIER XML ---
-                    nom_fichier = f"{msg_type_propre}_{from_date_propre}_au_{to_date_propre}_{gsrn_propre}.xml"
+                    nom_fichier = f"{msg_type_propre}_{from_date_propre}_au_{to_date_propre}_{gsrn_propre}_{direction_propre}.xml"
                     
                     # Écriture directe du contenu XML dans l'archive ZIP en mémoire
                     fichier_zip.writestr(nom_fichier, xml_complet.strip())
