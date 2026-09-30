@@ -71,7 +71,7 @@ if fichier_uploade is not None:
                     direction_propre = nettoyer_texte(direction)
                     
                     # --- NOM DU FICHIER XML ---
-                    nom_fichier = f"{msg_type_propre}_{gsrn_propre}_{from_date_propre}_au_{to_date_propre}_{direction_propre}.xml"
+                    nom_fichier = f"{gsrn_propre}_{direction_propre}_{msg_type_propre}_{from_date_propre}_au_{to_date_propre}.xml"
                     
                     # Écriture directe du contenu XML dans l'archive ZIP en mémoire
                     fichier_zip.writestr(nom_fichier, xml_complet.strip())
